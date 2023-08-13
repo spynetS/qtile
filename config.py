@@ -29,9 +29,10 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
+
 mod = "mod4"
 terminal = "kitty" #guess_terminal()
-browser = "chromium"
+browser = "firefox"
 
 
 @lazy.function
@@ -87,6 +88,8 @@ keys = ([
 
     #dmenu
     Key([mod],"d", lazy.spawn("dmenu_extended_run") ,desc="open dmenu_extended"),
+
+    Key([mod],"f", lazy.window.toggle_fullscreen() ,desc="open dmenu_extended"),
 ])
 
 
@@ -128,7 +131,7 @@ layouts = [
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    # layout.MonadTall(),
+    layout.MonadTall(),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
@@ -160,12 +163,15 @@ screens = [
                 ),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
+                widget.TextBox("🔉:"),
                 widget.PulseVolume(),
-                widget.Battery(),
+                widget.Battery(charge_char="🔋",discharge_char=" "),
+                widget.Sep(),
                 widget.CPU(),
                 widget.Memory(),
                 widget.TextBox("Net:"),
                 widget.NetGraph(),
+                widget.Sep(),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
                 widget.QuickExit(),
