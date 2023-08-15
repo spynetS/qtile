@@ -33,7 +33,7 @@ from libqtile.utils import guess_terminal
 mod = "mod4"
 terminal = "kitty" #guess_terminal()
 browser = "firefox"
-
+fileexplorer = "dolphin"
 
 @lazy.function
 def increase_gaps(qtile):
@@ -90,6 +90,12 @@ keys = ([
     Key([mod],"d", lazy.spawn("dmenu_extended_run") ,desc="open dmenu_extended"),
 
     Key([mod],"f", lazy.window.toggle_fullscreen() ,desc="open dmenu_extended"),
+
+    Key([mod],"F3", lazy.spawn(fileexplorer) ,desc=f"open ${fileexplorer}"),
+
+    # keboard controll
+    Key(["control","shift"],"k", lazy.spawn("setxkbmap us") ,desc="set keyboard to us"),
+    Key(["control","shift"],"l", lazy.spawn("setxkbmap se") ,desc="set keyboard to se"),
 ])
 
 
@@ -131,6 +137,7 @@ layouts = [
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
+    layout.Floating(),
     layout.MonadTall(),
     # layout.MonadWide(),
     # layout.RatioTile(),
