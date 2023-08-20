@@ -35,6 +35,7 @@ terminal = "kitty" #guess_terminal()
 browser = "firefox"
 fileexplorer = "dolphin"
 
+
 @lazy.function
 def increase_gaps(qtile):
     qtile.current_layout.margin += 2
@@ -131,18 +132,21 @@ for i in groups:
     )
 
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4,margi=5,
+                   ),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
     layout.Floating(),
-    layout.MonadTall(),
+    layout.MonadTall(
+        margin=5
+    ),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
-    # layout.TreeTab(),
+    layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
