@@ -28,12 +28,12 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-
+import os
 
 mod = "mod4"
-terminal = "kitty" #guess_terminal()
-browser = "firefox"
-fileexplorer = "dolphin"
+terminal = os.environ.get("TERM", "kitty") #guess_terminal()
+browser = os.environ.get("BROWSER")
+fileexplorer = os.environ.get("GUI_FILE_EXPLORER")
 
 
 @lazy.function
@@ -160,7 +160,7 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        bottom=bar.Bar(
+        top=bar.Bar(
             [
                 widget.CurrentLayout(),
                 widget.GroupBox(),
@@ -178,20 +178,16 @@ screens = [
                 widget.PulseVolume(),
                 widget.Sep(),
                 # widget.Battery(charge_char="🔋",discharge_char=" "),
-                # widget.Sep(),
                 widget.CPU(background="#500050"),
-                widget.Sep(),
                 widget.Memory(background="#505050"),
-                widget.Sep(),
                 widget.TextBox("Net:",background="#104032"),
                 widget.NetGraph(background="#104032"),
-                widget.Sep(),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
                 widget.QuickExit(),
             ],
             32,
-            background="#000000cc",
+                background="#000000bb",
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
